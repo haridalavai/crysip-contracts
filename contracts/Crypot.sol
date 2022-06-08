@@ -63,8 +63,24 @@ contract Crypot {
         description = _newDescription;
     }
 
-    function changeDistribution(address _token, uint _newDist) public restricted {
-        distribution[_token] = _newDist;
+    function changeDistribution(address[] memory _currencies,uint[] memory _units) public restricted {
+
+        require(_currencies.length == _units.length,'invalid distribution data');
+
+         for(uint i = 0; i< currencies.length; i++)
+        {
+            distribution[currencies[i]] = 0;
+        }
+
+        currencies = _currencies;
+        units = _units;
+
+        for(uint i = 0; i< currencies.length; i++)
+        {
+            distribution[_currencies[i]] = _units[i];
+        }
+
+
     }
 
     function isOwner() public view returns(bool){
