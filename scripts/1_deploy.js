@@ -29,9 +29,17 @@ async function main() {
 
   console.log('CrypotManager', crypotManager.address);
 
+  const Swap = await hre.ethers.getContractFactory('Swap');
+  const swap = await Swap.deploy();
+
+  await swap.deployed();
+
+  console.log('Swap', swap.address);
+
   fs.writeFileSync(
     './config.js',
-    `export const CRYPOT_MANAGER = '${crypotManager.address}'`
+    `export const CRYPOT_MANAGER = '${crypotManager.address}'
+    export const SWAP = '${swap.address}'`
   );
 }
 
